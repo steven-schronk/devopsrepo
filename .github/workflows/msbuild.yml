@@ -23,6 +23,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}    
+
     - uses: actions/checkout@v3
 
     - name: Add MSBuild to PATH
@@ -33,3 +36,20 @@ jobs:
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Upload to blob storage
+          uses: azure/CLI@v1
+          with:
+            inlineScript: |
+                az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s .
+        - name: Purge CDN endpoint
+          uses: azure/CLI@v1
+          with:
+            inlineScript: |
+               az cdn endpoint purge --content-paths  "/*" --profile-name "CDN_PROFILE_NAME" --name "CDN_ENDPOINT" --resource-group "RESOURCE_GROUP"
+               
+    # Azure logout
+    - name: logout
+      run: |
+            az logout
+      if: always()
