@@ -26,5 +26,5 @@ jobs:
           python -m pip install scons
           
       - name: Build
-        working-directory: ${{runner.workspace}}/Project1
+        working-directory: ${{runner.workspace}}/Project1/
         run: scons
