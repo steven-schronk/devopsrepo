@@ -29,7 +29,7 @@ jobs:
 
     - name: Assembly Build
       working-directory: ${{env.GITHUB_WORKSPACE}}/Project1
-      run: gcc Source.cpp
+      run: | gcc Source.cpp
 
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
