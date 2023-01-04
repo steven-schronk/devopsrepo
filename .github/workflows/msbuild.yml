@@ -49,13 +49,28 @@ jobs:
         name: hello.exe
         path: Project1/hello.exe
     
-    - name: Upload to Azure Blob Storage
-      id: upload
-      uses: github-developer/upload-azure-blob@v1
-      with:
-        account: devopstest
-        destination: devopstestcontainer
-        source: Project1/hello.exe
+    
+    - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+        inlineScript: |
+            az artifacts universal publish
+            --organization https://dev.azure.com/schronk/
+            --project="devopsproject"
+            --scope project
+            --feed devopsrepoartifacts
+            --name my-first-package
+            --version 0.0.1
+            --description "Welcome to Universal Packages"
+            --path .
+    
+    #- name: Upload to Azure Blob Storage
+    #  id: upload
+    #  uses: github-developer/upload-azure-blob@v1
+    #  with:
+    #    account: devopstest
+    #    destination: devopstestcontainer
+    #    source: Project1/hello.exe
     
     
     #- name: Purge CDN endpoint
