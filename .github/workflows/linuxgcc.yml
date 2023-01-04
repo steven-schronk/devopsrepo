@@ -38,10 +38,16 @@ jobs:
         name: hello.exe
         path: Project1/hello.exe
 
-    - name: Upload to Azure Blob Storage
-      id: upload
-      uses: github-developer/upload-azure-blob@v1
+    - name: Upload to blob storage
+      uses: azure/CLI@v1
       with:
-        account: devopstest
-        destination: devopstestcontainer
-        source: Project1/hello.exe
+        inlineScript: |
+            az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s .
+
+    #- name: Upload to Azure Blob Storage
+    #  id: upload
+    #  uses: github-developer/upload-azure-blob@v1
+    #  with:
+    #    account: devopstest
+    #    destination: devopstestcontainer
+    #    source: Project1/hello.exe
