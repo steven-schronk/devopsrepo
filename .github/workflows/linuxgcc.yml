@@ -35,6 +35,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
         gcc Project1/Source.cpp
+        ls -la
 
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
