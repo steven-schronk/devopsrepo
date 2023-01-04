@@ -46,8 +46,8 @@ jobs:
       uses: fixpoint/azblob-upload-artifact@v4
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} 
-      name: hello.exe
-      path: Project1/
+        name: hello.exe
+        path: Project1/
     
     #- name: Purge CDN endpoint
     #  uses: azure/CLI@v1
