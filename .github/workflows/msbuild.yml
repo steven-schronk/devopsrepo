@@ -30,9 +30,11 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
       
+      
+      
     - name: Assembly Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nasm_build.bat
+      run: Project1\nasm_build.bat
 
     #- name: Build
     #  working-directory: ${{env.GITHUB_WORKSPACE}}
