@@ -51,8 +51,8 @@ jobs:
     
     
     - name: Purge CDN endpoint
-        uses: azure/CLI@v1
-        with:
+      uses: azure/CLI@v1
+      with:
         inlineScript: |
             az artifacts universal publish
             --organization https://dev.azure.com/schronk/
