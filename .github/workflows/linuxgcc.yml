@@ -22,26 +22,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: azure/login@v1
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Assembly Build
-        working-directory: ${{env.GITHUB_WORKSPACE}}/Project1
-        run: gcc Source.cpp
+    - name: Assembly Build
+      working-directory: ${{env.GITHUB_WORKSPACE}}/Project1
+      run: gcc Source.cpp
 
-      - name: Upload to GitHub Actions Artifact Storage
-        uses: actions/upload-artifact@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} 
-          name: hello.exe
-          path: Project1/hello.exe
+    - name: Upload to GitHub Actions Artifact Storage
+      uses: actions/upload-artifact@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }} 
+        name: hello.exe
+        path: Project1/hello.exe
 
-      - name: Upload to Azure Blob Storage
-        id: upload
-        uses: github-developer/upload-azure-blob@v1
-        with:
-          account: devopstest
-          destination: devopstestcontainer
-          source: Project1/hello.exe
+    - name: Upload to Azure Blob Storage
+      id: upload
+      uses: github-developer/upload-azure-blob@v1
+      with:
+        account: devopstest
+        destination: devopstestcontainer
+        source: Project1/hello.exe
