@@ -48,7 +48,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s .
+            az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s a.out
 
     #- name: Upload to Azure Blob Storage
     #  id: upload
