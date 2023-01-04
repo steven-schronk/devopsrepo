@@ -43,10 +43,11 @@ jobs:
     #  run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
     - name: Upload to blob storage
-      uses: azure/CLI@v1
+      uses: fixpoint/azblob-upload-artifact@v4
       with:
-        inlineScript: |
-            az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s .
+        creds: ${{ secrets.AZURE_CREDENTIALS }} 
+      name: hello.exe
+      path: Project1/
     
     #- name: Purge CDN endpoint
     #  uses: azure/CLI@v1
