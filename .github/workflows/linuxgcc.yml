@@ -36,12 +36,15 @@ jobs:
       run: |
         gcc Project1/Source.cpp
         ls -la
+        
+    - name: Get Current Date
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
 
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} 
-        name: hello.exe-${{ github.sha }}
+        name: hello.exe-$NOW-${{ github.sha }}
         path: a.out
 
     #- name: Upload to blob storage
