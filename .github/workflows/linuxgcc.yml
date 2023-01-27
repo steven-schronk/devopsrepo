@@ -37,7 +37,7 @@ jobs:
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        name: ${{ github.event.repository.updated_at}
+        name: ${{ github.event.repository.updated_at }}
         path: a.out
 
     #- name: Upload to blob storage
