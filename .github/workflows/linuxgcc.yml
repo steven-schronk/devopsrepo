@@ -34,16 +34,15 @@ jobs:
         gcc Project1/Source.cpp
         ls -la
         
-    - name: Get short SHA
-      working-directory: ${{env.GITHUB_WORKSPACE}}
+    - name: Set build tag
       shell: bash
-      #run: git_hash=$(git rev-parse --short "$GITHUB_SHA")
-      run: echo "git_hash=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_HASH
-
+      run: |
+        echo "BUILD_TAG=${LAST_COMMIT_SHA:0:7}" >> $GITHUB_ENV 
+        
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-${ GITHUB_BRANCH }
+        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-${ GITHUB_ENV }
         path: a.out
 
     #- name: Upload to blob storage
