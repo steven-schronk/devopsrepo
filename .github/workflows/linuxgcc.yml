@@ -42,7 +42,7 @@ jobs:
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-$GITHUB_ENV
+        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-$BUILD_TAG
         path: a.out
 
     #- name: Upload to blob storage
