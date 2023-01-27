@@ -36,6 +36,7 @@ jobs:
         
     - name: Get short SHA
       working-directory: ${{env.GITHUB_WORKSPACE}}
+      shell: bash
       #run: git_hash=$(git rev-parse --short "$GITHUB_SHA")
       run: echo "git_hash=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_HASH
 
