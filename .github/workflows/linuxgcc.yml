@@ -37,12 +37,12 @@ jobs:
     - name: Get short SHA
       working-directory: ${{env.GITHUB_WORKSPACE}}
       #run: git_hash=$(git rev-parse --short "$GITHUB_SHA")
-      run: echo "git_branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_BRANCH
+      run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
 
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-$GITHUB_BRANCH
+        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-${ GITHUB_BRANCH }
         path: a.out
 
     #- name: Upload to blob storage
