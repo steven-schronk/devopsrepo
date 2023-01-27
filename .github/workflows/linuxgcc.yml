@@ -44,11 +44,11 @@ jobs:
         name: hello.exe
         path: a.out
 
-    - name: Upload to blob storage
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-            az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s a.out
+    #- name: Upload to blob storage
+    #  uses: azure/CLI@v1
+    #  with:
+    #    inlineScript: |
+    #        az storage blob upload-batch --account-name devopstest --auth-mode key -d '$web' -s a.out
 
     #- name: Upload to Azure Blob Storage
     #  id: upload
