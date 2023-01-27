@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} 
-        name: hello.exe-${{ github.event.repository.updated_at}}-${{ github.sha }}
+        name: ${{ github.event.repository.updated_at}}
         path: a.out
 
     #- name: Upload to blob storage
