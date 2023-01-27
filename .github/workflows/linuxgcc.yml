@@ -23,9 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Install GCC
       run: |
@@ -40,7 +37,6 @@ jobs:
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }} 
         name: ${{ github.event.repository.updated_at}}
         path: a.out
 
