@@ -37,7 +37,9 @@ jobs:
     - name: Set build tag
       shell: bash
       run: |
-        echo "BUILD_TAG=${LAST_COMMIT_SHA:0:7}" >> $GITHUB_ENV 
+        echo "BUILD_TAG=${LAST_COMMIT_SHA:0:7}" >> $GITHUB_ENV
+        echo $GITHUB_ENV
+        echo $BUILD_TAG
         
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
