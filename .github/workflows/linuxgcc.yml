@@ -34,6 +34,12 @@ jobs:
         gcc Project1/Source.cpp
         ls -la
         
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+    - name: Check outputs
+      run: echo ${{ steps.vars.outputs.sha_short }}
+        
     - name: Set build tag
       shell: bash
       run: |
@@ -48,7 +54,7 @@ jobs:
     - name: Upload to GitHub Actions Artifact Storage
       uses: actions/upload-artifact@v1
       with:
-        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-${{ BUILD_TAG }}
+        name: artifact-name-${{ github.run_number }}-${{ github.sha }}-${{ steps.vars.outputs.sha_short }}
         path: a.out
 
     #- name: Upload to blob storage
