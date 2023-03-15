@@ -32,7 +32,8 @@ extern int yyline_num;
 
 %%
 
-program : VEC1 NUMBER EOL
+program :
+	| VEC1 NUMBER EOL
 	| VEC2 NUMBER NUMBER EOL
 	;
 
@@ -46,6 +47,6 @@ int yyerror(char * s)
 
 int main(void)
 {
-	yyparse();
+	while(1) { yyparse(); }
 	return 0;
 }
