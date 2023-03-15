@@ -10,7 +10,7 @@ int yyerror();
 %}
 
 digit [0-9]
-integer {digit}+
+integer -?{digit}+
 real ({digit}+[.]{digit}*)|({digit}*[.]{digit}+)
 exp ({integer}|{real})[eE]-?{integer}
 
@@ -24,14 +24,12 @@ exp ({integer}|{real})[eE]-?{integer}
 
 \n { fputs("<<newline>>\n", stderr); ++yyline_num; return EOL; }
 
-[\t ] { /* ignore whitespace */ }
+[ \t\r] { /* ignore whitespace */ }
 
-^#.*\n { ++yyline_num; }
-
-.     yyerror("invalid character");
+.
 
 %%
 
 int yywrap(void) {
-	return 1;
+	return 0;
 }
