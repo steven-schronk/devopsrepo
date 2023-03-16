@@ -9,6 +9,8 @@ int yyerror();
 
 %}
 
+%option noyywrap
+
 digit   [0-9]
 integer -?{digit}+
 real    ({digit}+[.]{digit}*)|({digit}*[.]{digit}+)
@@ -17,21 +19,17 @@ float   ({real}f|{real}F|{exp}f|{exp}F)
 
 %%
 
--?({integer}|{real}|{exp}|{float}) { return NUMBER; }
+-?({integer}|{real}|{exp}|{float}) { printf("number "); return NUMBER; }
 
 "vec1" { return VEC1; }
 "vec2" { return VEC2; }
 "vec3" { return VEC3; }
 "vec4" { return VEC4; }
 
-[a-zA-Z_][a-zA-Z0-9_]{1,64} { return NAME; }
+"cube" {  printf("cube "); return CUBE; }
 
-\n { return EOL; }
+[a-zA-Z_][a-zA-Z0-9_]{1,64} { printf("name "); return NAME; }
 
-[ \t] { /* ignore whitespace */ }
+[\r\n] { printf("eol\n"); return EOL; }
 
 %%
-
-int yywrap(void) {
-	return 0;
-}
