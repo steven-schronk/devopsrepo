@@ -32,6 +32,8 @@ extern int yyline_num;
 %token NUMBER
 %token NAME
 %token EOL
+%token CUBE
+%token END
 
 %%
 
@@ -40,6 +42,8 @@ program :
 	| program VEC2 NAME NUMBER NUMBER EOL
 	| program VEC3 NAME NUMBER NUMBER NUMBER EOL
 	| program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
+	| program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+	| END
 	;
 
 %%
@@ -48,10 +52,4 @@ int yyerror(char * s)
 {
   fprintf(stderr, "line %d: %s\n", yyline_num, s);
   return 0;
-}
-
-int main(void)
-{
-	while(1) { yyparse(); }
-	return 0;
 }
