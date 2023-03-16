@@ -27,14 +27,19 @@ extern int yyline_num;
 
 %token VEC1
 %token VEC2
+%token VEC3
+%token VEC4
 %token NUMBER
+%token NAME
 %token EOL
 
 %%
 
 program :
-	| VEC1 NUMBER EOL
-	| VEC2 NUMBER NUMBER EOL
+	| program VEC1 NAME NUMBER EOL
+	| program VEC2 NAME NUMBER NUMBER EOL
+	| program VEC3 NAME NUMBER NUMBER NUMBER EOL
+	| program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
 	;
 
 %%

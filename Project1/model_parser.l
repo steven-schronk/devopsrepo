@@ -9,24 +9,26 @@ int yyerror();
 
 %}
 
-digit [0-9]
+digit   [0-9]
 integer -?{digit}+
-real ({digit}+[.]{digit}*)|({digit}*[.]{digit}+)
-exp ({integer}|{real})[eE]-?{integer}
+real    ({digit}+[.]{digit}*)|({digit}*[.]{digit}+)
+exp     ({integer}|{real})[eE]-?{integer}
+float   ({real}f|{real}F|{exp}f|{exp}F)
 
 %%
 
--?({integer}|{real}|{exp}) { return NUMBER; }
+-?({integer}|{real}|{exp}|{float}) { return NUMBER; }
 
 "vec1" { return VEC1; }
-
 "vec2" { return VEC2; }
+"vec3" { return VEC3; }
+"vec4" { return VEC4; }
 
-\n { fputs("<<newline>>\n", stderr); ++yyline_num; return EOL; }
+[a-zA-Z_][a-zA-Z0-9_]{1,64} { return NAME; }
 
-[ \t\r] { /* ignore whitespace */ }
+\n { return EOL; }
 
-.
+[ \t] { /* ignore whitespace */ }
 
 %%
 
