@@ -21,16 +21,16 @@ extern int yyline_num;
 %error-verbose
 
 %union {
- float value;
- char *group_name;
+ float d;
+ char *n;
 }
 
 %token VEC1
 %token VEC2
 %token VEC3
 %token VEC4
-%token NUMBER
-%token NAME
+%token <d> NUMBER
+%token <n> NAME
 %token EOL
 %token CUBE
 %token END
@@ -42,7 +42,7 @@ program :
 	| program VEC2 NAME NUMBER NUMBER EOL
 	| program VEC3 NAME NUMBER NUMBER NUMBER EOL
 	| program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
-	| program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+	| program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL { printf("|%f|\n", $5); }
 	| END
 	;
 
