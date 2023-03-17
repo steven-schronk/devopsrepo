@@ -19,7 +19,7 @@ float   ({real}f|{real}F|{exp}f|{exp}F)
 
 %%
 
--?({integer}|{real}|{exp}|{float}) { printf("number "); return NUMBER; }
+-?({integer}|{real}|{exp}|{float}) { printf("num "); return NUMBER; }
 
 "vec1" { return VEC1; }
 "vec2" { return VEC2; }
