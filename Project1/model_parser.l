@@ -1,9 +1,12 @@
 %{
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "model_parser.tab.h"
 
 int yyline_num = 1;
+int name_length = 0;
 
 int yyerror(); 
 
@@ -19,7 +22,7 @@ float   ({real}f|{real}F|{exp}f|{exp}F)
 
 %%
 
--?({integer}|{real}|{exp}|{float}) { printf("num "); return NUMBER; }
+-?({integer}|{real}|{exp}|{float}) { printf("num |%e|", atof(yytext)); return NUMBER; }
 
 "vec1" { return VEC1; }
 "vec2" { return VEC2; }
@@ -28,7 +31,7 @@ float   ({real}f|{real}F|{exp}f|{exp}F)
 
 "cube" {  printf("cube "); return CUBE; }
 
-[a-zA-Z_][a-zA-Z0-9_]{1,64} { printf("name "); return NAME; }
+[a-zA-Z_][a-zA-Z0-9_]{1,64} { printf("name %d->%s", strlen(yytext), yytext); return NAME; }
 
 [\r\n] { printf("eol\n"); return EOL; }
 
