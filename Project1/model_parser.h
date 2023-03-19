@@ -28,3 +28,6 @@ void print_vertstore();
 int add_cube(vertstore* v, vec3 a, vec3 b);
 
 vertstore create_vertstore();
+
+
+void add_vertex(float x);

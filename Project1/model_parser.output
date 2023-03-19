@@ -1,0 +1,324 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: /* empty */
+    2        | program NUMBER EOL
+    3        | program VEC1 NAME NUMBER EOL
+    4        | program VEC2 NAME NUMBER NUMBER EOL
+    5        | program VEC3 NAME NUMBER NUMBER NUMBER EOL
+    6        | program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
+    7        | program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+    8        | END
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+VEC1 (258) 3
+VEC2 (259) 4
+VEC3 (260) 5
+VEC4 (261) 6
+NUMBER (262) 2 3 4 5 6 7
+NAME (263) 3 4 5 6 7
+EOL (264) 2 3 4 5 6 7
+CUBE (265) 7
+END (266) 8
+
+
+Nonterminals, with rules where they appear
+
+$accept (12)
+    on left: 0
+program (13)
+    on left: 1 2 3 4 5 6 7 8, on right: 0 2 3 4 5 6 7
+
+
+state 0
+
+    0 $accept: . program $end
+
+    END  shift, and go to state 1
+
+    $default  reduce using rule 1 (program)
+
+    program  go to state 2
+
+
+state 1
+
+    8 program: END .
+
+    $default  reduce using rule 8 (program)
+
+
+state 2
+
+    0 $accept: program . $end
+    2 program: program . NUMBER EOL
+    3        | program . VEC1 NAME NUMBER EOL
+    4        | program . VEC2 NAME NUMBER NUMBER EOL
+    5        | program . VEC3 NAME NUMBER NUMBER NUMBER EOL
+    6        | program . VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
+    7        | program . CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    $end    shift, and go to state 3
+    VEC1    shift, and go to state 4
+    VEC2    shift, and go to state 5
+    VEC3    shift, and go to state 6
+    VEC4    shift, and go to state 7
+    NUMBER  shift, and go to state 8
+    CUBE    shift, and go to state 9
+
+
+state 3
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 4
+
+    3 program: program VEC1 . NAME NUMBER EOL
+
+    NAME  shift, and go to state 10
+
+
+state 5
+
+    4 program: program VEC2 . NAME NUMBER NUMBER EOL
+
+    NAME  shift, and go to state 11
+
+
+state 6
+
+    5 program: program VEC3 . NAME NUMBER NUMBER NUMBER EOL
+
+    NAME  shift, and go to state 12
+
+
+state 7
+
+    6 program: program VEC4 . NAME NUMBER NUMBER NUMBER NUMBER EOL
+
+    NAME  shift, and go to state 13
+
+
+state 8
+
+    2 program: program NUMBER . EOL
+
+    EOL  shift, and go to state 14
+
+
+state 9
+
+    7 program: program CUBE . NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    NAME  shift, and go to state 15
+
+
+state 10
+
+    3 program: program VEC1 NAME . NUMBER EOL
+
+    NUMBER  shift, and go to state 16
+
+
+state 11
+
+    4 program: program VEC2 NAME . NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 17
+
+
+state 12
+
+    5 program: program VEC3 NAME . NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 18
+
+
+state 13
+
+    6 program: program VEC4 NAME . NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 19
+
+
+state 14
+
+    2 program: program NUMBER EOL .
+
+    $default  reduce using rule 2 (program)
+
+
+state 15
+
+    7 program: program CUBE NAME . NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 20
+
+
+state 16
+
+    3 program: program VEC1 NAME NUMBER . EOL
+
+    EOL  shift, and go to state 21
+
+
+state 17
+
+    4 program: program VEC2 NAME NUMBER . NUMBER EOL
+
+    NUMBER  shift, and go to state 22
+
+
+state 18
+
+    5 program: program VEC3 NAME NUMBER . NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 23
+
+
+state 19
+
+    6 program: program VEC4 NAME NUMBER . NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 24
+
+
+state 20
+
+    7 program: program CUBE NAME NUMBER . NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 25
+
+
+state 21
+
+    3 program: program VEC1 NAME NUMBER EOL .
+
+    $default  reduce using rule 3 (program)
+
+
+state 22
+
+    4 program: program VEC2 NAME NUMBER NUMBER . EOL
+
+    EOL  shift, and go to state 26
+
+
+state 23
+
+    5 program: program VEC3 NAME NUMBER NUMBER . NUMBER EOL
+
+    NUMBER  shift, and go to state 27
+
+
+state 24
+
+    6 program: program VEC4 NAME NUMBER NUMBER . NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 28
+
+
+state 25
+
+    7 program: program CUBE NAME NUMBER NUMBER . NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 29
+
+
+state 26
+
+    4 program: program VEC2 NAME NUMBER NUMBER EOL .
+
+    $default  reduce using rule 4 (program)
+
+
+state 27
+
+    5 program: program VEC3 NAME NUMBER NUMBER NUMBER . EOL
+
+    EOL  shift, and go to state 30
+
+
+state 28
+
+    6 program: program VEC4 NAME NUMBER NUMBER NUMBER . NUMBER EOL
+
+    NUMBER  shift, and go to state 31
+
+
+state 29
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER . NUMBER NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 32
+
+
+state 30
+
+    5 program: program VEC3 NAME NUMBER NUMBER NUMBER EOL .
+
+    $default  reduce using rule 5 (program)
+
+
+state 31
+
+    6 program: program VEC4 NAME NUMBER NUMBER NUMBER NUMBER . EOL
+
+    EOL  shift, and go to state 33
+
+
+state 32
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER . NUMBER NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 34
+
+
+state 33
+
+    6 program: program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL .
+
+    $default  reduce using rule 6 (program)
+
+
+state 34
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER . NUMBER NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 35
+
+
+state 35
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER . NUMBER NUMBER EOL
+
+    NUMBER  shift, and go to state 36
+
+
+state 36
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER . NUMBER EOL
+
+    NUMBER  shift, and go to state 37
+
+
+state 37
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER . EOL
+
+    EOL  shift, and go to state 38
+
+
+state 38
+
+    7 program: program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL .
+
+    $default  reduce using rule 7 (program)

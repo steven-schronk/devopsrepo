@@ -2,6 +2,10 @@
 #include "model_parser.h"
 
 extern FILE * yyin;
+extern char* name;
+
+vertstore v;
+int vertex_counter = 0;
 
 vertstore create_vertstore() {
 	vertstore v;
@@ -20,6 +24,12 @@ void print_vertstore(vertstore* v) {
 		printf("%d: %f\n", count, v->vertex[count]);
 		++count;
 	}
+}
+
+void add_vertex(float x) {
+	printf("\nadd_vertex_yyval: %f\n",x);
+	v.vertex[vertex_counter++] = x;
+	if (vertex_counter > VERTSTORE_MAX-1) { vertex_counter = 0; }
 }
 
 int add_cube(vertstore* v, vec3 a, vec3 b) {
@@ -43,6 +53,12 @@ int add_cube(vertstore* v, vec3 a, vec3 b) {
 	return 0;
 }
 
+void test_function() {
+	//printf("test_function: %f\n", yyval);
+	printf("yytext: %s\n", name);
+
+}
+
 int main(int argc, char** argv) {
 	FILE* model;
 	if (argc > 1) {
@@ -52,7 +68,8 @@ int main(int argc, char** argv) {
 		}
 	}
 	yyin = model;
-	vertstore v = create_vertstore();
+	v = create_vertstore();
+
 	vec3 a = { 1,2,3 };
 	vec3 b = { 4,5,6 };
 	
@@ -60,7 +77,7 @@ int main(int argc, char** argv) {
 	//printf("> ");
 	//yyparse();
 	do {
-		printf("call to parse\n");
+		//printf("call to parse\n");
 		yyparse();
 	} while (!feof(yyin));
 	print_vertstore(&v);
