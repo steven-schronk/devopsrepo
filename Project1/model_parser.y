@@ -9,11 +9,9 @@ int yyerror();
 
 extern int yyline_num;
 
-float variables[8];
-
 %}
 
-%error-verbose
+%define parse.error verbose
 
 %union {
 	float dx;
@@ -31,18 +29,15 @@ float variables[8];
 %token CUBE
 %token END
 
-
-
 %%
 
-
 program :
-	| program NUMBER EOL { printf("ZZZ %f ZZZ", $2); }
+	| program NUMBER EOL
 	| program VEC1 NAME NUMBER EOL
 	| program VEC2 NAME NUMBER NUMBER EOL
 	| program VEC3 NAME NUMBER NUMBER NUMBER EOL
 	| program VEC4 NAME NUMBER NUMBER NUMBER NUMBER EOL
-	| program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL { test_function(); }
+	| program CUBE NAME NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER EOL
 	| END
 	;
 

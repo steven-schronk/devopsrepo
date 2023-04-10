@@ -8,6 +8,6 @@ if exist model_parser.tab.exe del model_parser.tab.exe
 if exist model_parser.tab.h   del model_parser.tab.h
 if exist model_parser.tab.h   del model_parser.tab.h
 if exist model_parser.tab.obj del model_parser.tab.obj
-bison -v --debug -d model_parser.y
-flex model_parser.l
-cl /nologo model_parser.tab.c lex.yy.c model_parser.c
+win_bison -v --debug -d model_parser.y
+win_flex model_parser.l
+cl /nologo model_parser.tab.c lex.yy.c model_parser.c /I freeglut\include\ freeglut\lib\freeglut.lib

@@ -1,19 +1,4 @@
-#define VERTSTORE_MAX 10
-
-typedef struct {
-	float x;
-	float y;
-	float z;
-} vec3;
-
-typedef struct {
-	float x;
-	float y;
-	float z;
-	float r;
-	float g;
-	float b;
-} vertex;
+#define VERTSTORE_MAX 6
 
 typedef struct {
 	int max;		// used to know when to stop drawing verts
@@ -25,9 +10,8 @@ void print_vertstore();
 
 // add new cube to vertstore
 // vectors are two opposite corners of mesh
-int add_cube(vertstore* v, vec3 a, vec3 b);
+int add_cube(vertstore* v);
 
 vertstore create_vertstore();
-
 
 void add_vertex(float x);
